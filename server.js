@@ -1,7 +1,7 @@
 // Dependencies
 var express 	 = require('express');
 var mongoose 	 = require('mongoose');
-var port 		 = proces.env.PORT || 3000
+var port 		 = process.env.PORT || 3000
 var morgan 		 = require('morgan');
 var bodyParser 	 = require('body-parser');
 var methOverride = require('method-override');
@@ -10,11 +10,11 @@ var app 		 = express();
 // Express config
 
 // Sets mongoDB connection
-mongoose.connect('mongo url'); // ??????
+mongoose.connect('mongodb://motornapila:harbija@ds055945.mlab.com:55945/motornapila'); // ??????
 
 //Logging and parsing
 app.use(express.static(__dirname + '/public')); 	//sets static folder to public
-app.use('bower_components', express.static(__dirname + 'bower_components')); //use bower components
+app.use('/bower_components', express.static(__dirname + '/bower_components')); //use bower components
 app.use(morgan('dev'));								//log with morgan
 app.use(bodyParser.json());							//parse application/json
 app.use(bodyParser.urlencoded({extended: true})); 	// parse application/x-www-form-urlencoded
@@ -24,7 +24,7 @@ app.use(methOverride());
 
 // Routes
 
-//require('./app/routes.js')(app);
+require('./app/routes.js')(app);
 
 // Listen
 app.listen(port);
